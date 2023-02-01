@@ -9,7 +9,7 @@ class CustomSearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15),
       child: TextFormField(
         onChanged: (value) {},
         decoration: InputDecoration(

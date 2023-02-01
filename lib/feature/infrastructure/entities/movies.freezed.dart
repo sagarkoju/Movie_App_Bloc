@@ -30,6 +30,10 @@ mixin _$MovieResponse {
   @HiveField(3)
   @JsonKey(name: 'total_results')
   int get totalResults => throw _privateConstructorUsedError;
+  @HiveField(4)
+  @JsonKey(name: 'production_companies')
+  List<ProductionCompanyResponse>? get productioncompanies =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,10 +48,19 @@ abstract class $MovieResponseCopyWith<$Res> {
       _$MovieResponseCopyWithImpl<$Res, MovieResponse>;
   @useResult
   $Res call(
-      {@HiveField(0) int page,
-      @HiveField(1) List<Movies> results,
-      @HiveField(2) @JsonKey(name: 'total_pages') int totalPages,
-      @HiveField(3) @JsonKey(name: 'total_results') int totalResults});
+      {@HiveField(0)
+          int page,
+      @HiveField(1)
+          List<Movies> results,
+      @HiveField(2)
+      @JsonKey(name: 'total_pages')
+          int totalPages,
+      @HiveField(3)
+      @JsonKey(name: 'total_results')
+          int totalResults,
+      @HiveField(4)
+      @JsonKey(name: 'production_companies')
+          List<ProductionCompanyResponse>? productioncompanies});
 }
 
 /// @nodoc
@@ -67,6 +80,7 @@ class _$MovieResponseCopyWithImpl<$Res, $Val extends MovieResponse>
     Object? results = null,
     Object? totalPages = null,
     Object? totalResults = null,
+    Object? productioncompanies = freezed,
   }) {
     return _then(_value.copyWith(
       page: null == page
@@ -85,6 +99,10 @@ class _$MovieResponseCopyWithImpl<$Res, $Val extends MovieResponse>
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
+      productioncompanies: freezed == productioncompanies
+          ? _value.productioncompanies
+          : productioncompanies // ignore: cast_nullable_to_non_nullable
+              as List<ProductionCompanyResponse>?,
     ) as $Val);
   }
 }
@@ -98,10 +116,19 @@ abstract class _$$_MovieResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int page,
-      @HiveField(1) List<Movies> results,
-      @HiveField(2) @JsonKey(name: 'total_pages') int totalPages,
-      @HiveField(3) @JsonKey(name: 'total_results') int totalResults});
+      {@HiveField(0)
+          int page,
+      @HiveField(1)
+          List<Movies> results,
+      @HiveField(2)
+      @JsonKey(name: 'total_pages')
+          int totalPages,
+      @HiveField(3)
+      @JsonKey(name: 'total_results')
+          int totalResults,
+      @HiveField(4)
+      @JsonKey(name: 'production_companies')
+          List<ProductionCompanyResponse>? productioncompanies});
 }
 
 /// @nodoc
@@ -119,6 +146,7 @@ class __$$_MovieResponseCopyWithImpl<$Res>
     Object? results = null,
     Object? totalPages = null,
     Object? totalResults = null,
+    Object? productioncompanies = freezed,
   }) {
     return _then(_$_MovieResponse(
       page: null == page
@@ -137,6 +165,10 @@ class __$$_MovieResponseCopyWithImpl<$Res>
           ? _value.totalResults
           : totalResults // ignore: cast_nullable_to_non_nullable
               as int,
+      productioncompanies: freezed == productioncompanies
+          ? _value._productioncompanies
+          : productioncompanies // ignore: cast_nullable_to_non_nullable
+              as List<ProductionCompanyResponse>?,
     ));
   }
 }
@@ -145,11 +177,22 @@ class __$$_MovieResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_MovieResponse implements _MovieResponse {
   const _$_MovieResponse(
-      {@HiveField(0) this.page = 0,
-      @HiveField(1) final List<Movies> results = const <Movies>[],
-      @HiveField(2) @JsonKey(name: 'total_pages') this.totalPages = 0,
-      @HiveField(3) @JsonKey(name: 'total_results') this.totalResults = 0})
-      : _results = results;
+      {@HiveField(0)
+          this.page = 0,
+      @HiveField(1)
+          final List<Movies> results = const <Movies>[],
+      @HiveField(2)
+      @JsonKey(name: 'total_pages')
+          this.totalPages = 0,
+      @HiveField(3)
+      @JsonKey(name: 'total_results')
+          this.totalResults = 0,
+      @HiveField(4)
+      @JsonKey(name: 'production_companies')
+          final List<ProductionCompanyResponse>?
+              productioncompanies = const <ProductionCompanyResponse>[]})
+      : _results = results,
+        _productioncompanies = productioncompanies;
 
   factory _$_MovieResponse.fromJson(Map<String, dynamic> json) =>
       _$$_MovieResponseFromJson(json);
@@ -176,10 +219,22 @@ class _$_MovieResponse implements _MovieResponse {
   @HiveField(3)
   @JsonKey(name: 'total_results')
   final int totalResults;
+  final List<ProductionCompanyResponse>? _productioncompanies;
+  @override
+  @HiveField(4)
+  @JsonKey(name: 'production_companies')
+  List<ProductionCompanyResponse>? get productioncompanies {
+    final value = _productioncompanies;
+    if (value == null) return null;
+    if (_productioncompanies is EqualUnmodifiableListView)
+      return _productioncompanies;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'MovieResponse(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+    return 'MovieResponse(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults, productioncompanies: $productioncompanies)';
   }
 
   @override
@@ -192,13 +247,20 @@ class _$_MovieResponse implements _MovieResponse {
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
             (identical(other.totalResults, totalResults) ||
-                other.totalResults == totalResults));
+                other.totalResults == totalResults) &&
+            const DeepCollectionEquality()
+                .equals(other._productioncompanies, _productioncompanies));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, page,
-      const DeepCollectionEquality().hash(_results), totalPages, totalResults);
+  int get hashCode => Object.hash(
+      runtimeType,
+      page,
+      const DeepCollectionEquality().hash(_results),
+      totalPages,
+      totalResults,
+      const DeepCollectionEquality().hash(_productioncompanies));
 
   @JsonKey(ignore: true)
   @override
@@ -216,16 +278,20 @@ class _$_MovieResponse implements _MovieResponse {
 
 abstract class _MovieResponse implements MovieResponse {
   const factory _MovieResponse(
-      {@HiveField(0)
-          final int page,
-      @HiveField(1)
-          final List<Movies> results,
-      @HiveField(2)
-      @JsonKey(name: 'total_pages')
-          final int totalPages,
-      @HiveField(3)
-      @JsonKey(name: 'total_results')
-          final int totalResults}) = _$_MovieResponse;
+          {@HiveField(0)
+              final int page,
+          @HiveField(1)
+              final List<Movies> results,
+          @HiveField(2)
+          @JsonKey(name: 'total_pages')
+              final int totalPages,
+          @HiveField(3)
+          @JsonKey(name: 'total_results')
+              final int totalResults,
+          @HiveField(4)
+          @JsonKey(name: 'production_companies')
+              final List<ProductionCompanyResponse>? productioncompanies}) =
+      _$_MovieResponse;
 
   factory _MovieResponse.fromJson(Map<String, dynamic> json) =
       _$_MovieResponse.fromJson;
@@ -244,6 +310,10 @@ abstract class _MovieResponse implements MovieResponse {
   @HiveField(3)
   @JsonKey(name: 'total_results')
   int get totalResults;
+  @override
+  @HiveField(4)
+  @JsonKey(name: 'production_companies')
+  List<ProductionCompanyResponse>? get productioncompanies;
   @override
   @JsonKey(ignore: true)
   _$$_MovieResponseCopyWith<_$_MovieResponse> get copyWith =>
@@ -793,4 +863,239 @@ abstract class _Movies implements Movies {
   @JsonKey(ignore: true)
   _$$_MoviesCopyWith<_$_Movies> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+ProductionCompanyResponse _$ProductionCompanyResponseFromJson(
+    Map<String, dynamic> json) {
+  return _ProductionCompanyResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductionCompanyResponse {
+  @HiveField(0)
+  int get id => throw _privateConstructorUsedError;
+  @HiveField(1)
+  @JsonKey(name: 'logo_path')
+  String get logopath => throw _privateConstructorUsedError;
+  @HiveField(2)
+  String get name => throw _privateConstructorUsedError;
+  @HiveField(3)
+  @JsonKey(name: 'origin_country')
+  String get origincountry => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProductionCompanyResponseCopyWith<ProductionCompanyResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductionCompanyResponseCopyWith<$Res> {
+  factory $ProductionCompanyResponseCopyWith(ProductionCompanyResponse value,
+          $Res Function(ProductionCompanyResponse) then) =
+      _$ProductionCompanyResponseCopyWithImpl<$Res, ProductionCompanyResponse>;
+  @useResult
+  $Res call(
+      {@HiveField(0) int id,
+      @HiveField(1) @JsonKey(name: 'logo_path') String logopath,
+      @HiveField(2) String name,
+      @HiveField(3) @JsonKey(name: 'origin_country') String origincountry});
+}
+
+/// @nodoc
+class _$ProductionCompanyResponseCopyWithImpl<$Res,
+        $Val extends ProductionCompanyResponse>
+    implements $ProductionCompanyResponseCopyWith<$Res> {
+  _$ProductionCompanyResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? logopath = null,
+    Object? name = null,
+    Object? origincountry = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      logopath: null == logopath
+          ? _value.logopath
+          : logopath // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      origincountry: null == origincountry
+          ? _value.origincountry
+          : origincountry // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProductionCompanyResponseCopyWith<$Res>
+    implements $ProductionCompanyResponseCopyWith<$Res> {
+  factory _$$_ProductionCompanyResponseCopyWith(
+          _$_ProductionCompanyResponse value,
+          $Res Function(_$_ProductionCompanyResponse) then) =
+      __$$_ProductionCompanyResponseCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@HiveField(0) int id,
+      @HiveField(1) @JsonKey(name: 'logo_path') String logopath,
+      @HiveField(2) String name,
+      @HiveField(3) @JsonKey(name: 'origin_country') String origincountry});
+}
+
+/// @nodoc
+class __$$_ProductionCompanyResponseCopyWithImpl<$Res>
+    extends _$ProductionCompanyResponseCopyWithImpl<$Res,
+        _$_ProductionCompanyResponse>
+    implements _$$_ProductionCompanyResponseCopyWith<$Res> {
+  __$$_ProductionCompanyResponseCopyWithImpl(
+      _$_ProductionCompanyResponse _value,
+      $Res Function(_$_ProductionCompanyResponse) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? logopath = null,
+    Object? name = null,
+    Object? origincountry = null,
+  }) {
+    return _then(_$_ProductionCompanyResponse(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      logopath: null == logopath
+          ? _value.logopath
+          : logopath // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      origincountry: null == origincountry
+          ? _value.origincountry
+          : origincountry // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ProductionCompanyResponse implements _ProductionCompanyResponse {
+  const _$_ProductionCompanyResponse(
+      {@HiveField(0) this.id = 0,
+      @HiveField(1) @JsonKey(name: 'logo_path') this.logopath = '',
+      @HiveField(2) this.name = '',
+      @HiveField(3) @JsonKey(name: 'origin_country') this.origincountry = ''});
+
+  factory _$_ProductionCompanyResponse.fromJson(Map<String, dynamic> json) =>
+      _$$_ProductionCompanyResponseFromJson(json);
+
+  @override
+  @JsonKey()
+  @HiveField(0)
+  final int id;
+  @override
+  @HiveField(1)
+  @JsonKey(name: 'logo_path')
+  final String logopath;
+  @override
+  @JsonKey()
+  @HiveField(2)
+  final String name;
+  @override
+  @HiveField(3)
+  @JsonKey(name: 'origin_country')
+  final String origincountry;
+
+  @override
+  String toString() {
+    return 'ProductionCompanyResponse(id: $id, logopath: $logopath, name: $name, origincountry: $origincountry)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProductionCompanyResponse &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.logopath, logopath) ||
+                other.logopath == logopath) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.origincountry, origincountry) ||
+                other.origincountry == origincountry));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, logopath, name, origincountry);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProductionCompanyResponseCopyWith<_$_ProductionCompanyResponse>
+      get copyWith => __$$_ProductionCompanyResponseCopyWithImpl<
+          _$_ProductionCompanyResponse>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ProductionCompanyResponseToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductionCompanyResponse implements ProductionCompanyResponse {
+  const factory _ProductionCompanyResponse(
+      {@HiveField(0)
+          final int id,
+      @HiveField(1)
+      @JsonKey(name: 'logo_path')
+          final String logopath,
+      @HiveField(2)
+          final String name,
+      @HiveField(3)
+      @JsonKey(name: 'origin_country')
+          final String origincountry}) = _$_ProductionCompanyResponse;
+
+  factory _ProductionCompanyResponse.fromJson(Map<String, dynamic> json) =
+      _$_ProductionCompanyResponse.fromJson;
+
+  @override
+  @HiveField(0)
+  int get id;
+  @override
+  @HiveField(1)
+  @JsonKey(name: 'logo_path')
+  String get logopath;
+  @override
+  @HiveField(2)
+  String get name;
+  @override
+  @HiveField(3)
+  @JsonKey(name: 'origin_country')
+  String get origincountry;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProductionCompanyResponseCopyWith<_$_ProductionCompanyResponse>
+      get copyWith => throw _privateConstructorUsedError;
 }

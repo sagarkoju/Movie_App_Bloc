@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:movie_app/app_setup/dio/dio_client.dart';
-import 'package:movie_app/feature/application/bloc/trending_movie_bloc.dart';
+import 'package:movie_app/feature/application/Animation/animation_bloc.dart';
+import 'package:movie_app/feature/application/Trending/trending_movie_bloc.dart';
+
 import 'package:movie_app/feature/infrastructure/repository/movie_repository.dart';
 
 GetIt inject = GetIt.instance;
@@ -29,7 +31,10 @@ void registerRepository() {
 
 //register all the blocs
 void registerBloc() {
-  inject.registerLazySingleton(
-    () => TrendingMovieBloc(iMovieRepository: inject()),
-  );
+  inject
+    ..registerLazySingleton(
+      () => TrendingMovieBloc(iMovieRepository: inject()),
+    )
+    ..registerLazySingleton(
+        () => AnimationMovieBloc(iMovieRepository: inject()));
 }

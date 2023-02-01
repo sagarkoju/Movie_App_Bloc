@@ -16,6 +16,10 @@ class MovieResponse with _$MovieResponse {
     @HiveField(1) @Default(<Movies>[]) List<Movies> results,
     @HiveField(2) @JsonKey(name: 'total_pages') @Default(0) int totalPages,
     @HiveField(3) @JsonKey(name: 'total_results') @Default(0) int totalResults,
+    @HiveField(4)
+    @JsonKey(name: 'production_companies')
+    @Default(<ProductionCompanyResponse>[])
+        List<ProductionCompanyResponse>? productioncompanies,
   }) = _MovieResponse;
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) =>
@@ -43,4 +47,21 @@ class Movies with _$Movies {
   }) = _Movies;
 
   factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
+}
+
+@freezed
+@HiveType(typeId: HiveBox.genreResponseBoxId)
+class ProductionCompanyResponse with _$ProductionCompanyResponse {
+  const factory ProductionCompanyResponse({
+    @HiveField(0) @Default(0) int id,
+    @HiveField(1) @JsonKey(name: 'logo_path') @Default('') String logopath,
+    @HiveField(2) @Default('') String name,
+    @HiveField(3)
+    @JsonKey(name: 'origin_country')
+    @Default('')
+        String origincountry,
+  }) = _ProductionCompanyResponse;
+
+  factory ProductionCompanyResponse.fromJson(Map<String, dynamic> json) =>
+      _$ProductionCompanyResponseFromJson(json);
 }

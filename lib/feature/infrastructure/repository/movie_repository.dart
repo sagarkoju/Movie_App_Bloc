@@ -9,6 +9,10 @@ abstract class IMovieRepository {
   Future<Either<MovieResponse, Failure>> getTrendingMovies({
     int? page,
   });
+  Future<Either<MovieResponse, Failure>> getAnimationMovies({
+    int? page,
+    required int animationId,
+  });
 }
 
 class MovieRepository implements IMovieRepository {
@@ -25,6 +29,28 @@ class MovieRepository implements IMovieRepository {
       };
       final response = await dio.get<Map<String, dynamic>>(
         MoviesEp.trendingMovies,
+        queryParameters: query,
+      );
+      final json = Map<String, dynamic>.from(response.data!);
+      final result = MovieResponse.fromJson(json);
+      return Left(result);
+    } on DioError catch (e) {
+      return Right(e.toFailure);
+    } catch (e) {
+      return Right(Failure.fromException());
+    }
+  }
+
+  @override
+  Future<Either<MovieResponse, Failure>> getAnimationMovies(
+      {int? page, required int animationId}) async {
+    try {
+      final query = {
+        'page': page ?? 1,
+        'with_genres': animationId,
+      };
+      final response = await dio.get<Map<String, dynamic>>(
+        MoviesEp.animationMovies,
         queryParameters: query,
       );
       final json = Map<String, dynamic>.from(response.data!);

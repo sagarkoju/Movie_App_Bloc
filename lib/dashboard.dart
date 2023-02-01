@@ -4,10 +4,12 @@ import 'package:movie_app/core/components/custom_icon_icons.dart';
 import 'package:movie_app/core/components/custom_movie_texttile.dart';
 import 'package:movie_app/core/components/custom_search_widget.dart';
 import 'package:movie_app/core/theme/app_colors.dart';
+import 'package:movie_app/feature/application/Animation/animation_bloc.dart';
+import 'package:movie_app/feature/application/Trending/trending_movie_bloc.dart';
+import 'package:movie_app/feature/presentation/animation_movie.dart';
 import 'package:movie_app/feature/presentation/trending_movie.dart';
 
 import 'app_setup/dependency_injection.dart';
-import 'feature/application/bloc/trending_movie_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,6 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     ///fetch trending movies
     inject<TrendingMovieBloc>().add(const GetTrendingMovies());
+    inject<AnimationMovieBloc>().add(const GetAnimationMovies(
+      animationId: 16,
+    ));
     super.initState();
   }
 
@@ -62,13 +67,23 @@ class _HomeScreenState extends State<HomeScreen> {
             ]),
       ),
       body: SafeArea(
-        child: Column(
-          children: const [
-            CustomHeaderTitle(),
-            CustomSearchBarWidget(),
-            CustomMovieTextTile(),
-            Expanded(child: TrendingMoviesList())
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              CustomHeaderTitle(),
+              CustomSearchBarWidget(),
+              CustomMovieTextTile(
+                text: 'Now ',
+                text1: 'Showing',
+              ),
+              TrendingMoviesList(),
+              CustomMovieTextTile(
+                text: 'Animation ',
+                text1: 'Showing',
+              ),
+              AnimationScreen(),
+            ],
+          ),
         ),
       ),
     );

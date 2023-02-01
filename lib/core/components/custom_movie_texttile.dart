@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class CustomMovieTextTile extends StatelessWidget {
-  const CustomMovieTextTile({
-    Key? key,
-  }) : super(key: key);
-
+  const CustomMovieTextTile({Key? key, required this.text, required this.text1})
+      : super(key: key);
+  final String text;
+  final String text1;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 20.0,
-        vertical: 25,
+        vertical: 5,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           RichText(
-            text: const TextSpan(
-              style: TextStyle(color: Colors.black, fontSize: 36),
+            text: TextSpan(
+              style: const TextStyle(color: Colors.black, fontSize: 36),
               children: <TextSpan>[
                 TextSpan(
-                  text: 'Now ',
-                  style: TextStyle(
+                  text: text,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                     color: Color(0xfff5f5f5),
@@ -30,8 +30,8 @@ class CustomMovieTextTile extends StatelessWidget {
                   ),
                 ),
                 TextSpan(
-                  text: 'Showing',
-                  style: TextStyle(
+                  text: text1,
+                  style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w400,
                     color: Colors.white60,

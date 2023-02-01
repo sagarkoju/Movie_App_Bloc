@@ -21,13 +21,15 @@ class MovieResponseAdapter extends TypeAdapter<MovieResponse> {
       results: (fields[1] as List).cast<Movies>(),
       totalPages: fields[2] as int,
       totalResults: fields[3] as int,
+      productioncompanies:
+          (fields[4] as List?)?.cast<ProductionCompanyResponse>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, MovieResponse obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.page)
       ..writeByte(1)
@@ -35,7 +37,9 @@ class MovieResponseAdapter extends TypeAdapter<MovieResponse> {
       ..writeByte(2)
       ..write(obj.totalPages)
       ..writeByte(3)
-      ..write(obj.totalResults);
+      ..write(obj.totalResults)
+      ..writeByte(4)
+      ..write(obj.productioncompanies);
   }
 
   @override
@@ -122,6 +126,50 @@ class MoviesAdapter extends TypeAdapter<Movies> {
           typeId == other.typeId;
 }
 
+class ProductionCompanyResponseAdapter
+    extends TypeAdapter<ProductionCompanyResponse> {
+  @override
+  final int typeId = 1;
+
+  @override
+  ProductionCompanyResponse read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ProductionCompanyResponse(
+      id: fields[0] as int,
+      logopath: fields[1] as String,
+      name: fields[2] as String,
+      origincountry: fields[3] as String,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ProductionCompanyResponse obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.logopath)
+      ..writeByte(2)
+      ..write(obj.name)
+      ..writeByte(3)
+      ..write(obj.origincountry);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ProductionCompanyResponseAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -135,6 +183,11 @@ _$_MovieResponse _$$_MovieResponseFromJson(Map<String, dynamic> json) =>
           const <Movies>[],
       totalPages: json['total_pages'] as int? ?? 0,
       totalResults: json['total_results'] as int? ?? 0,
+      productioncompanies: (json['production_companies'] as List<dynamic>?)
+              ?.map((e) =>
+                  ProductionCompanyResponse.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <ProductionCompanyResponse>[],
     );
 
 Map<String, dynamic> _$$_MovieResponseToJson(_$_MovieResponse instance) =>
@@ -143,6 +196,7 @@ Map<String, dynamic> _$$_MovieResponseToJson(_$_MovieResponse instance) =>
       'results': instance.results,
       'total_pages': instance.totalPages,
       'total_results': instance.totalResults,
+      'production_companies': instance.productioncompanies,
     };
 
 _$_Movies _$$_MoviesFromJson(Map<String, dynamic> json) => _$_Movies(
@@ -177,4 +231,22 @@ Map<String, dynamic> _$$_MoviesToJson(_$_Movies instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
       'status': instance.status,
       'tagline': instance.tagline,
+    };
+
+_$_ProductionCompanyResponse _$$_ProductionCompanyResponseFromJson(
+        Map<String, dynamic> json) =>
+    _$_ProductionCompanyResponse(
+      id: json['id'] as int? ?? 0,
+      logopath: json['logo_path'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      origincountry: json['origin_country'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_ProductionCompanyResponseToJson(
+        _$_ProductionCompanyResponse instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'logo_path': instance.logopath,
+      'name': instance.name,
+      'origin_country': instance.origincountry,
     };

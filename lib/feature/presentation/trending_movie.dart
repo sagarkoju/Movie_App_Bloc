@@ -6,7 +6,8 @@ import 'package:movie_app/app_setup/dependency_injection.dart';
 import 'package:movie_app/core/components/custom_shimmer.dart';
 import 'package:movie_app/core/extension/image_extension.dart';
 import 'package:movie_app/core/theme/app_colors.dart';
-import 'package:movie_app/feature/application/bloc/trending_movie_bloc.dart';
+import 'package:movie_app/feature/application/Trending/trending_movie_bloc.dart';
+
 import 'package:movie_app/feature/presentation/movie_detail.dart';
 
 class TrendingMoviesList extends StatefulWidget {
