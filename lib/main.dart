@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/app_setup/dependency_injection.dart';
 import 'package:movie_app/app_setup/hive/hive_setup.dart';
 import 'package:movie_app/dashboard.dart';
 
@@ -9,7 +10,7 @@ Future<void> main() async {
 }
 
 Future<void> initApp() async {
-  // initDependencyInjection();
+  initDependencyInjection();
   await HiveSetup.initHive();
 }
 

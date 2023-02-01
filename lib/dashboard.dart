@@ -4,6 +4,10 @@ import 'package:movie_app/core/components/custom_icon_icons.dart';
 import 'package:movie_app/core/components/custom_movie_texttile.dart';
 import 'package:movie_app/core/components/custom_search_widget.dart';
 import 'package:movie_app/core/theme/app_colors.dart';
+import 'package:movie_app/feature/presentation/trending_movie.dart';
+
+import 'app_setup/dependency_injection.dart';
+import 'feature/application/bloc/trending_movie_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,6 +17,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    ///fetch trending movies
+    inject<TrendingMovieBloc>().add(const GetTrendingMovies());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: const [
             CustomHeaderTitle(),
             CustomSearchBarWidget(),
-            CustomMovieTextTile()
+            CustomMovieTextTile(),
+            Expanded(child: TrendingMoviesList())
           ],
         ),
       ),
