@@ -3,10 +3,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/app_setup/dependency_injection.dart';
+import 'package:movie_app/core/components/custom_movie_texttile.dart';
 import 'package:movie_app/core/components/custom_shimmer.dart';
 import 'package:movie_app/core/extension/image_extension.dart';
 import 'package:movie_app/core/theme/app_colors.dart';
 import 'package:movie_app/feature/application/Trending/trending_movie_bloc.dart';
+import 'package:movie_app/feature/presentation/all_movies.dart';
 
 import 'package:movie_app/feature/presentation/movie_detail.dart';
 
@@ -30,6 +32,11 @@ class _TrendingMoviesListState extends State<TrendingMoviesList> {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const CustomMovieTextTile(
+              text: 'Now ',
+              text1: 'Showing',
+              isTap: true,
+            ),
             if (state is TrendingLoading)
               CustomShimmer(
                 baseColor: AppColors.transparentColor,

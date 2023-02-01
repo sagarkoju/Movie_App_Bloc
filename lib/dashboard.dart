@@ -72,14 +72,11 @@ class _HomeScreenState extends State<HomeScreen> {
             children: const [
               CustomHeaderTitle(),
               CustomSearchBarWidget(),
-              CustomMovieTextTile(
-                text: 'Now ',
-                text1: 'Showing',
-              ),
               TrendingMoviesList(),
               CustomMovieTextTile(
                 text: 'Animation ',
                 text1: 'Showing',
+                isTap: false,
               ),
               AnimationScreen(),
             ],
